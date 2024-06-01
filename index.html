@@ -30,15 +30,34 @@
         <div class="content__container">
             <h3 class="animate__animated">Кто же мы такие?</h3>
             <p class="animate__animated">Мы - маленькая, но продвигающаяся команда дизайнеров и риггеров в сфере витубинга! Мы предлагаем вам полный спектр услуг по созданию и продвижению вашего виртуального персонажа. Вы сами можете выбрать внешний вид и стиль вашего виртуального ютубера, а также дизайнов ваших сцен, или довериться нашим профессиональным дизайнерам и сценаристам. Мы обеспечим вам высококачественную анимацию, изумительный и неповторимый дизайн. Виртуальные ютуберы - это не просто персонажи, это ваше творческое выражение, ваше альтернативное “я”, ваш способ донести свои идеи и эмоции до миллионов зрителей по всему миру! Наши заказы выполняются таким образом:</p>
-        <div class="slider animate__animated">
-            <div class="slide" id="slide1">Slide 1</div>
-            <div class="slide" id="slide2">Slide 2</div>
-            <div class="slide" id="slide3">Slide 3</div>
+            <div class="slider__container animate__animated">
+                <div class="slider">
+                    <a class="button__prev" onclick="prevSlide()"><img src="./assets/images/counter-prev.png" alt=""></a>
+                    <div class="slide" id="slide1">
+                        <img src="./assets/images/slider/1.png" alt="">
+                        <p>Вы выбираете нужный вам товар в каталоге, оплачиваете его и переходите по ссылке на нашего Телеграмм-бота.</p>
+                    </div>
+                    <div class="slide" id="slide2">
+                        <img src="./assets/images/slider/2.png" alt="">
+                        <p>Вы обсуждаете ваши пожелания с нашим ассистентом, прикрепляете примеры. Работники возьмутся за ваш заказ.</p>
+                    </div>
+                    <div class="slide" id="slide3">
+                        <img src="./assets/images/slider/3.png" alt="">
+                        <p>После того, как заказ готов - вы получаете файл с вашим заказом. Приятного пользования!</p>
+                    </div>
+                    <a class="button__next" onclick="nextSlide()"><img src="./assets/images/counter-next.png" alt=""></a>
+                </div>
+            </div>
         </div>
-        <div class="slider-buttons">
-            <button onclick="prevSlide()">Previous</button>
-            <button onclick="nextSlide()">Next</button>
-        </div>
+        <div class="links_container">
+            <div class="gallery-link__container">
+                <h3>Хотите взглянуть на работы?</br>Загляните в галерею!</h3>
+                <button>Перейти в галерею</button>
+            </div>
+            <div class="catalog-link__container">
+                <h3>Уже знакомы с услугами?</br>Мы ждём вас в каталоге!</h3>
+                <button>Перейти в каталог</button>
+            </div>
         </div>
     <script src="./assets/scripts/animation.js"></script>
     <script src="./assets/scripts/slider.js"></script>

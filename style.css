@@ -1,40 +1,57 @@
 body {
-    width: 100vw;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     font-family: "Raleway";
+    overflow-x: hidden;
 }
 
+/* Хэдер */
+
 header {
-    background-color: #ffffff;
+    background-color: transparent;
     margin: 0;
-    visibility: hidden;
-    box-shadow: 0px 3px 5px rgba(99, 99, 99, 0.5);
-    position: relative;
-    z-index: 2;
 }
 
 .header__container {
-    padding: 20px;
+    padding-left: 2vw;
+    padding-top: 2vh;
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
 }
 
 .item__container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end; /* чтобы элементы внутри блока прижались к низу */
+    align-items: flex-end; /* чтобы элементы внутри блока прижались к низу */
+    width: 10vw; /* ширина блока */
+    box-sizing: border-box;
+}
+
+.header__container .item__container:last-child {
+    margin-left: 50vw; /* сдвигает последний блок вправо */
+}
+.logo__text {
+    text-transform: uppercase;
+    text-align: center;
+    font-style: italic;
+    font-size: medium;
+    text-decoration: none;
+    color: black;
+}
+
+.logo {
+    width: 25px;
+    height: 25px;
 }
 
 .nav__link {
-    font-family: "Roboto";
     text-decoration: none;
     text-transform: uppercase;
-    font-size: x-large;
-    text-align: center;
-    letter-spacing: 5px;
+    font-size: medium;
     color: black;
     transition: color 0.3s ease;
 }
@@ -43,26 +60,21 @@ header {
     color: #006DAA;
 }
 
-main {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+.basket__logo {
+    width: 25px;
+    height: 25px;
 }
 
 .intro {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .intro__container {
     text-align: center;
-    z-index: 2;
     margin-top: 30px;
+    
 }
 
 .intro__subtitle {
@@ -80,11 +92,8 @@ main {
 }
 
 .content__container {
-    display: flex;
-    flex-direction: column;
-    margin-left: 40px;
-    margin-right: 40px;
-    height: 100vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 
 h3 {
@@ -92,56 +101,8 @@ h3 {
 }
 
 p {
-    font-size: 20px;
-}
-
-.slider__container {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-self: stretch;
-    margin-top: 100px;
-    height: 20vh;
-}
-
-.slider {
-    position: relative;
-    height: 10vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-.slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    transition: transform 0.5s ease;
-}
-  
-.slide img {
-    width: 50px;
-    height: 50px;
-}
-
-  .hidden {
-    transform: translateX(100%);
-  }
-  
-  .visible {
-    transform: translateX(0);
-  }
-  
-  .left {
-    transform: translateX(-100%);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .button__next, .button__prev {
@@ -155,7 +116,6 @@ p {
 }
 
 button {
-    overflow: hidden;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #0093E6;
@@ -170,3 +130,85 @@ button:hover {
     background-color: #006DAA;
 }
 
+.links_container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.gallery-link__container, .catalog-link__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer {
+    background-color: #EDEDED;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+  
+.footer__inner {
+    width: 100%;
+    margin: 0;
+    padding: 55px 0 60px;
+}
+  
+.footer__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+  
+
+.footer__list-item {
+    width: 20%;
+    margin-bottom: 20px;
+}
+  .footer__list-item:hover .footer__logo {
+    fill: #006DAA;
+}
+  
+.footer__logo {
+    display: block;
+    margin: 0 auto;
+    transition: fill 0.1s linear;
+}
+.footer__logo:nth-child(1) {
+    width: 120px;
+    height: 90px;
+}
+.footer__logo:nth-child(2) {
+    width: 100px;
+    height: 100px;
+ }
+.footer__logo:nth-child(3) {
+    width: 140px;
+    height: 95px;
+}
+.footer__logo:nth-child(4) {
+    width: 100px;
+    height: 100px;
+}
+.footer__logo:nth-child(5) {
+    width: 100px;
+    height: 70px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0; /* Убирает отступы, которые могут быть у списка по умолчанию */
+    margin: 0; /* Убирает внешние отступы списка */
+}
+
+.copyright {
+    padding-bottom: 25px;
+    position: relative;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000;
+    line-height: 23.48px;
+    text-align: center;
+}

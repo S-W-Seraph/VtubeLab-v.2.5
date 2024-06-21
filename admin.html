@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #login-form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #login-form input {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #login-form button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        #login-form button:hover {
+            background-color: #0056b3;
+        }
+        #action-list {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-form">
+        <input type="text" id="username" placeholder="Логин">
+        <input type="password" id="password" placeholder="Пароль">
+        <button onclick="login()">Войти</button>
+    </div>
+    <div id="action-list">
+        <h2>Список действий</h2>
+        <ul>
+            <li>Действие 1</li>
+            <li>Действие 2</li>
+            <li>Действие 3</li>
+        </ul>
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Проверка логина и пароля
+            if (username === 'admin' && password === '12345') {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('action-list').style.display = 'block';
+            } else {
+                alert('Неправильный логин или пароль');
+            }
+        }
+    </script>
+</body>
+</html>

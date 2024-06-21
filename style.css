@@ -5,6 +5,7 @@ body {
     padding: 0;
     font-family: "Raleway";
     overflow-x: hidden;
+    background-color: #f4f4f4;
 }
 
 /* Хэдер */
@@ -33,6 +34,12 @@ header {
 
 .header__container .item__container:last-child {
     margin-left: 50vw; /* сдвигает последний блок вправо */
+}
+
+a .logo__text:hover {
+  color: #006DAA;
+
+  
 }
 .logo__text {
     text-transform: uppercase;
@@ -69,6 +76,8 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
 
 .intro__container {
@@ -91,9 +100,44 @@ header {
     font-size: 60px;
 }
 
+.background {
+    position: relative;
+    width: 100%;
+    height: 50vh; /* Высота контейнера равна высоте экрана */
+}
+
+.background-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачное затемнение */
+    z-index: 2; /* Средний слой */
+}
+
 .content__container {
-    margin-left: 1vw;
-    margin-right: 1vw;
+    position: relative;
+    width: 100%; /* Высота контейнера равна высоте экрана */
+}
+
+.text-box {
+    position: absolute;
+    top: 45%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 3; /* Самый верхний слой */
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* Самый нижний слой */
 }
 
 h3 {
@@ -101,8 +145,7 @@ h3 {
 }
 
 p {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    font-size: 20px;
 }
 
 .button__next, .button__prev {
@@ -116,10 +159,11 @@ p {
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #0093E6;
-    border: none;
+    padding: 20px 30px;
+    font-size: 20px;
+    background-color: #006DAA;
+    border-width: 0px;
+    border-radius: 5px;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -127,14 +171,15 @@ button {
 }
 
 button:hover {
-    background-color: #006DAA;
+    background-color: #00598d;
 }
 
 .links_container {
     display: flex;
     flex-direction: column;
-    margin-left: 40px;
-    margin-right: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: white;
 }
 
 .gallery-link__container, .catalog-link__container {
@@ -211,4 +256,301 @@ ul {
     color: #000;
     line-height: 23.48px;
     text-align: center;
+}
+
+.catalog-description {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.catalog__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.catalog__text {
+    text-align: center;
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+
+/* Продукт */
+
+.product-box {
+    background-color: #fff;
+    padding: 20px;
+    display: grid;
+    gap: 10px;
+  }
+  
+  .product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .product-title {
+    font-size: 30px;
+    color: #333;
+  }
+  
+  .product-price {
+    font-size: 20px;
+    color: #888;
+  }
+  
+  .description-and-quantity {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .product-description {
+    font-size: 20px;
+    color: #555;
+    flex: 1;
+  }
+  
+  .quantity-and-button {
+    display: flex;
+    flex-direction: row;
+    
+    align-items: flex-start;
+    gap: 10px; /* Расстояние между количеством и кнопкой */
+  }
+  
+  .product-quantity {
+    overflow: hidden;
+    font-size: 16px;
+    padding: 5px;
+    width: 60px; /* Фиксированная ширина для поля ввода количества */
+  }
+  
+  .buy-button {
+    background-color: #006DAA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buy-button:hover {
+    background-color: #00598d;
+  }
+  
+  .buy-button:disabled {
+    background-color: transparent;
+    border: #006DAA;
+    color: #000;
+  }
+  
+  .product-images {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 0px;
+  }
+  
+  .button-group button {
+    border-radius: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 12vw;
+    padding-right: 12vw;
+
+}
+
+  .product-image {
+    width: 30%;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+/* Галерея */
+
+.gallery-description {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.gallery__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery__text {
+    text-align: center;
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+
+.album .responsive-container-block {
+    min-height: 75px;
+    height: fit-content;
+    width: 100%;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+    justify-content: flex-start;
+  }
+  
+  .album .responsive-container-block.bg {
+    max-width: 1320px;
+    margin: 0 0 0 0;
+    justify-content: space-around;
+  }
+  
+  .album .img {
+    width: 100%;
+    margin: 0 0 20px 0;
+  }
+  
+  .album #i9rb {
+    color: black;
+  }
+  
+  .album #ir6i {
+    color: black;
+  }
+  
+  .album #ikz3b {
+    color: black;
+  }
+  
+  .album .responsive-container-block.img-cont {
+    flex-direction: column;
+    max-width: 33.3%;
+    min-height: auto;
+    margin: 0 0 0 0;
+    height: 100%;
+  }
+  
+  .album #ipix {
+    color: black;
+  }
+  
+  .album #ipzoh {
+    color: black;
+  }
+  
+  .album #ig5q8 {
+    color: black;
+  }
+  
+  .album #imtzl {
+    color: black;
+  }
+  
+  .album #i53es {
+    color: black;
+  }
+  
+  .album .img.img-big {
+    height: 50%;
+    margin: 0 0 16px 0;
+  }
+  
+  @media (max-width: 1024px) {
+    .album .img {
+      margin: 0 0 18px 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .album .img {
+      max-width: 32.5%;
+      margin: 0 0 0 0;
+    }
+  
+    .album .responsive-container-block.bg {
+      flex-direction: column;
+    }
+  
+    .album .responsive-container-block.img-cont {
+      max-width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  
+    .album .img.img-big {
+      max-width: 49%;
+      margin: 0 0 0 0;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .album .img {
+      max-width: 94%;
+      margin: 0 0 25px 0;
+    }
+  
+    .album .responsive-container-block.img-cont {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 10px 10px 10px;
+    }
+  
+    .album .img.img-big {
+      max-width: 94%;
+      margin: 0 0 25px 0;
+    }
+  
+    .album .img.img-last {
+      margin: 0 0 5px 0;
+    }
+  }
+
+
+  /* Корзина */
+
+  /* Style for the popup */
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

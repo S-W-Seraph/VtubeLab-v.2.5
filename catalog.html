@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="body_container">
+        <header class="header">
+            <div class="header__container">
+                <div class="item__container logo__container"> 
+                    <a class="logo__text" href="index.html"><img class="logo" src="assets/images/logo.png" alt=""><b>Vtubelab</b></a>
+                </div>
+                <div class="item__container catalog"><a class="nav__link" href="catalog.html"><b>Catalog</b></a></div>
+                <div class="item__container gallery"><a class="nav__link" href="gallery.html"><b>Gallery</b></a></div>
+                <div class="item__container basket"><a class="nav__link" href="basket.html"><img class="basket__logo" src="assets/images/basket.png" alt=""></a></div>
+            </div>
+        </header>
+        <div class="catalog-description">
+            <h3 class="catalog__title">Каталог</h3>
+            <p class="catalog__text">Lorem ipsum dolor sit amet...</p>
+        </div>
+        <div class="catalog" id="catalog">
+            <div class="product-box" id="item-Концепт-арт">
+                <div class="product-header catalog-item">
+                    <h1 class="product-title" id="name-Концепт-арт">Концепт-арт</h1>
+                    <p class="product-price" id="price-Концепт-арт">Цена: 5000 руб.</p>
+                </div>
+                <div class="description-and-quantity">
+                    <p class="product-description">Описание Концепт-арта...</p>
+                    <div class="quantity-and-button">
+                        <input type="number" class="product-quantity" id="quantity-Концепт-арт" value="0" min="0">
+                        <button class="buy-button addtocart" onclick="toggleCart('Концепт-арт')">В Корзину</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-box" id="item-Модель">
+                <div class="product-header catalog-item">
+                    <h1 class="product-title" id="name-Модель">Модель</h1>
+                    <p class="product-price" id="price-Модель">Цена: 5000 руб.</p>
+                </div>
+                <div class="description-and-quantity">
+                    <p class="product-description">Описание модели...</p>
+                    <div class="quantity-and-button">
+                        <input type="number" class="product-quantity" id="quantity-Модель" value="0" min="0">
+                        <button class="buy-button addtocart" onclick="toggleCart('Модель')">В Корзину</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-box" id="item-Риг">
+                <div class="product-header catalog-item">
+                    <h1 class="product-title" id="name-Риг">Риг</h1>
+                    <p class="product-price" id="price-Риг">Цена: 5000 руб.</p>
+                </div>
+                <div class="description-and-quantity">
+                    <p class="product-description">Описание рига...</p>
+                    <div class="quantity-and-button">
+                        <input type="number" class="product-quantity" id="quantity-Риг" value="0" min="0">
+                        <button class="buy-button addtocart" onclick="toggleCart('Риг')">В Корзину</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-box" id="item-Оверлей">
+                <div class="product-header catalog-item">
+                    <h1 class="product-title" id="name-Оверлей">Оверлей</h1>
+                    <p class="product-price" id="price-Оверлей">Цена: 5000 руб.</p>
+                </div>
+                <div class="description-and-quantity">
+                    <p class="product-description">Описание Оверлей...</p>
+                    <div class="quantity-and-button">
+                        <input type="number" class="product-quantity" id="quantity-Оверлей" value="0" min="0">
+                        <button class="buy-button addtocart" onclick="toggleCart('Оверлей')">В Корзину</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-box" id="item-Стикеры">
+                <div class="product-header catalog-item">
+                    <h1 class="product-title" id="name-Стикеры">Стикеры</h1>
+                    <p class="product-price" id="price-Стикеры">Цена: 5000 руб.</p>
+                </div>
+                <div class="description-and-quantity">
+                    <p class="product-description">Описание Стикеры...</p>
+                    <div class="quantity-and-button">
+                        <input type="number" class="product-quantity" id="quantity-Стикеры" value="0" min="0">
+                        <button class="buy-button addtocart" onclick="toggleCart('Стикеры')">В Корзину</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-box" id="item-BGM">
+                <div class="product-header catalog-item">
+                    <h1 class="product-title" id="name-BGM">BGM</h1>
+                    <p class="product-price" id="price-BGM">Цена: 5000 руб.</p>
+                </div>
+                <div class="description-and-quantity">
+                    <p class="product-description">Описание BGM...</p>
+                    <div class="quantity-and-button">
+                        <input type="number" class="product-quantity" id="quantity-BGM" value="0" min="0">
+                        <button class="buy-button addtocart" onclick="toggleCart('BGM')">В Корзину</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 id="total-price">Итоговая цена: 0 руб.</h2>
+        <button id="buy-button" onclick="buyItems()">Купить</button>
+        <footer class="">
+            <div class="contacts__button">
+                <img src="" alt="">
+                <h4>Контакты</h4>
+                <img src="" alt="">
+            </div>
+            <div class="footer__inner">
+                <ul class="footer__list">
+                    <li class="footer__list-item"><a class="footer__link" href="#" target="_blank"><svg class="footer__logo"><use href="#discord"></use></svg></a></li>
+                    <li class="footer__list-item"><a class="footer__link" href="#" target="_blank"><svg class="footer__logo"><use href="#telegram"></use></svg></a></li>
+                    <li class="footer__list-item"><a class="footer__link" href="#" target="_blank"><svg class="footer__logo"><use href="#vk"></use></svg></a></li>
+                    <li class="footer__list-item"><a class="footer__link" href="#" target="_blank"><svg class="footer__logo"><use href="#google"></use></svg></a></li>
+                    <li class="footer__list-item"><a class="footer__link" href="#" target="_blank"><svg class="footer__logo"><use href="#youtube"></use></svg></a></li>
+                </ul>
+            </div>
+            <div class="copyright">© 2023-2024. Все права защищены. Копирование и использование материалов из сайта запрещено!</div>
+        </footer>
+    </div>
+    <script src="./assets/scripts/catalog.js"></script>
+</body>
+</html>

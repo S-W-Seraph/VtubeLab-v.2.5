@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basket</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="body_container">
+        <header class="header">
+            <div class="header__container">
+                <div class="item__container logo__container">
+                    <a class="logo__text" href="index.html"><img class="logo" src="assets/images/logo.png" alt=""><b>Vtubelab</b></a>
+                </div>
+                <div class="item__container catalog"><a class="nav__link" href="catalog.html"><b>Catalog</b></a></div>
+                <div class="item__container gallery"><a class="nav__link" href="gallery.html"><b>Gallery</b></a></div>
+                <div class="item__container basket"><a class="nav__link" href="basket.html"><img class="basket__logo" src="assets/images/basket.png" alt=""></a></div>
+            </div>
+        </header>
+        <div class="cart-container">
+            <h2>Cart</h2>
+            <table>
+              <thead>
+                <tr>
+                <th><strong>Product</strong></th>
+                <th><strong>Price</strong></th>
+                <th><strong>Quantity</strong></th>
+              </tr>
+              </thead>
+              <tbody id="carttable">
+              </tbody>
+            </table>
+            <hr>
+            <table id="carttotals">
+              <tr>
+                <td><strong>Items</strong></td>
+                <td><strong>Total</strong></td>
+              </tr>
+              <tr>
+                <td>x <span id="itemsquantity">0</span></td>
+                <td>$<span id="total">0</span></td>
+              </tr>
+            </table>
+            <div class="cart-buttons">  
+              <button id="emptycart" onclick="emptyCart()">Empty Cart</button>
+              <button id="buy-button" onclick="showPaymentPopup()">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+       <!-- Payment Popup -->
+       <div id="payment-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-button" onclick="closePaymentPopup()">&times;</span>
+            <h2>Методы оплаты</h2>
+            <p>Выберите способ оплаты:</p>
+            <button onclick="payWith('Credit Card')">Кредитная карта</button>
+            <button onclick="payWith('PayPal')">PayPal</button>
+            <button onclick="payWith('Bank Transfer')">Банковский перевод</button>
+        </div>
+    </div>
+    <script src="./assets/scripts/basket.js"></script>
+</body>
+</html>

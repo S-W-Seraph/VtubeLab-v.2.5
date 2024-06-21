@@ -92,3 +92,14 @@ function loadCartState() {
 }
 
 window.onload = loadCartState;
+
+// Add event listeners to handle quantity changes
+каталогТоваров.forEach(product => {
+  const quantityInput = document.getElementById(`quantity-${product.id}`);
+  quantityInput.addEventListener('input', (event) => {
+    const newQuantity = parseInt(event.target.value, 10);
+    product.количество = isNaN(newQuantity) ? 0 : newQuantity;
+    updateTotalPrice();
+    saveCartState();
+  });
+});

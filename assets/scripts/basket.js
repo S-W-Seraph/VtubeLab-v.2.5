@@ -73,14 +73,20 @@ function showConfirmationPopup() {
       date: new Date().toISOString() // Add a timestamp to the purchase
   };
 
-  // Retrieve existing purchases from local storage
-  let purchases = JSON.parse(localStorage.getItem('purchases')) || [];
-
-  // Add new purchase to the list
-  purchases.push(purchaseInfo);
-
-  // Store updated purchases list in local storage
-  localStorage.setItem('purchases', JSON.stringify(purchases));
+  // Send purchase info to the server
+  fetch('/api/purchases', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(purchaseInfo)
+  }).then(response => response.json())
+    .then(data => {
+        console.log('Purchase saved:', data);
+        displayPurchaseHistory();
+    }).catch(error => {
+        console.error('Error saving purchase:', error);
+    });
 
   // Hide cart elements
   document.getElementById('carttable').style.display = 'none';
@@ -91,49 +97,4 @@ function showConfirmationPopup() {
 
   // Show confirmation popup
   document.getElementById('confirmation-popup').style.display = 'block';
-
-  // Update the purchase history display
-  displayPurchaseHistory();
-}
-
-function closeConfirmationPopup() {
-  document.getElementById('confirmation-popup').style.display = 'none';
-}
-
-function copyCode() {
-  const code = document.getElementById('confirmation-code').innerText;
-  navigator.clipboard.writeText(code).then(() => {
-      alert('Код скопирован в буфер обмена!');
-  });
-}
-
-function displayPurchaseHistory() {
-  const purchases = JSON.parse(localStorage.getItem('purchases')) || [];
-  const purchaseHistoryDiv = document.getElementById('purchase-history');
-  purchaseHistoryDiv.innerHTML = ''; // Clear previous entries
-
-  purchases.forEach(purchase => {
-      const purchaseItem = document.createElement('div');
-      purchaseItem.classList.add('purchase-item');
-
-      const purchaseDate = document.createElement('p');
-      purchaseDate.textContent = `Дата: ${new Date(purchase.date).toLocaleString()}`;
-
-      const purchaseCode = document.createElement('p');
-      purchaseCode.textContent = `Код подтверждения: ${purchase.code}`;
-
-      const purchaseItemsList = document.createElement('ul');
-
-      purchase.items.forEach(item => {
-          const listItem = document.createElement('li');
-          listItem.textContent = `${item.название}: ${item.количество}`;
-          purchaseItemsList.appendChild(listItem);
-      });
-
-      purchaseItem.appendChild(purchaseDate);
-      purchaseItem.appendChild(purchaseCode);
-      purchaseItem.appendChild(purchaseItemsList);
-
-      purchaseHistoryDiv.appendChild(purchaseItem);
-  });
 }

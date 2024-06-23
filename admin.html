@@ -41,6 +41,9 @@
             display: none;
             text-align: center;
         }
+        .purchase-item {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +59,10 @@
             <li>Действие 2</li>
             <li>Действие 3</li>
         </ul>
+        <div id="purchase-info">
+            <h2>Информация о покупках</h2>
+            <div id="purchases"></div>
+        </div>
     </div>
 
     <script>
@@ -67,9 +74,41 @@
             if (username === 'admin' && password === '12345') {
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('action-list').style.display = 'block';
+                displayPurchaseInfo();
             } else {
                 alert('Неправильный логин или пароль');
             }
+        }
+
+        function displayPurchaseInfo() {
+            const purchases = JSON.parse(localStorage.getItem('purchases')) || [];
+            const purchasesDiv = document.getElementById('purchases');
+            purchasesDiv.innerHTML = ''; // Clear previous entries
+
+            purchases.forEach(purchase => {
+                const purchaseItem = document.createElement('div');
+                purchaseItem.classList.add('purchase-item');
+
+                const purchaseDate = document.createElement('p');
+                purchaseDate.textContent = `Дата: ${new Date(purchase.date).toLocaleString()}`;
+
+                const purchaseCode = document.createElement('p');
+                purchaseCode.textContent = `Код подтверждения: ${purchase.code}`;
+
+                const purchaseItemsList = document.createElement('ul');
+
+                purchase.items.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${item.название}: ${item.количество}`;
+                    purchaseItemsList.appendChild(listItem);
+                });
+
+                purchaseItem.appendChild(purchaseDate);
+                purchaseItem.appendChild(purchaseCode);
+                purchaseItem.appendChild(purchaseItemsList);
+
+                purchasesDiv.appendChild(purchaseItem);
+            });
         }
     </script>
 </body>

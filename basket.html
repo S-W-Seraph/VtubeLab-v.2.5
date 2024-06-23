@@ -37,8 +37,8 @@
         <td><strong>Total</strong></td>
       </tr>
       <tr>
-        <td>x <span id="itemsquantity">0</span></td>
-        <td>$<span id="total">0</span></td>
+        <td>x<span id="itemsquantity">0</span></td>
+        <td>₽<span id="total">0</span></td>
       </tr>
     </table>
     <div class="cart-buttons">  
@@ -51,15 +51,30 @@
   <!-- Оплата -->
   <div id="payment-popup" class="popup">
     <div class="popup-content">
-      <span class="close-button" onclick="closePaymentPopup()">&times;</span>
-      <h2>Методы оплаты</h2>
-      <p>Выберите способ оплаты:</p>
-      <button onclick="payWith('Credit Card')">Кредитная карта</button>
-      <button onclick="payWith('PayPal')">PayPal</button>
-      <button onclick="payWith('Bank Transfer')">Банковский перевод</button>
+        <span class="close-button" onclick="closePaymentPopup()">&times;</span>
+        <h2>Методы оплаты</h2>
+        <p>Выберите способ оплаты:</p>
+        <button onclick="payWith('Credit Card')">Кредитная карта</button>
+        <button onclick="payWith('PayPal')">PayPal</button>
+        <button onclick="payWith('Bank Transfer')">Банковский перевод</button>
     </div>
+</div>
+
+
+    <!-- Подтверждение покупки -->
+    <div id="confirmation-popup" class="popup">
+      <div class="popup-content">
+          <span class="close-button" onclick="closeConfirmationPopup()">&times;</span>
+          <h2>Спасибо за покупку!</h2>
+          <p>Ваш код подтверждения: <span id="confirmation-code"></span></p>
+          <button onclick="copyCode()">Скопировать код</button>
+      </div>
   </div>
   
+  <h2>История покупок</h2>
+  <div id="purchase-history"></div>
+
+
 
   <script src="./assets/scripts/basket.js"></script>
 

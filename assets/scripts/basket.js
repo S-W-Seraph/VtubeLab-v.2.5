@@ -97,4 +97,6 @@ function showConfirmationPopup() {
 
   // Show confirmation popup
   document.getElementById('confirmation-popup').style.display = 'block';
+
+  document.getElementById('confirmation-popup').style.display = 'none';
 }

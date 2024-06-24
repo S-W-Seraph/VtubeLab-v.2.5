@@ -37,8 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Корзина очищена!');
       window.location.reload();
   });
-
-  displayPurchaseHistory();
 });
 
 function showPaymentPopup() {
@@ -91,9 +89,6 @@ function showConfirmationPopup() {
 
   // Show confirmation popup
   document.getElementById('confirmation-popup').style.display = 'block';
-
-  // Update the purchase history display
-  displayPurchaseHistory();
 }
 
 function closeConfirmationPopup() {
@@ -104,36 +99,5 @@ function copyCode() {
   const code = document.getElementById('confirmation-code').innerText;
   navigator.clipboard.writeText(code).then(() => {
       alert('Код скопирован в буфер обмена!');
-  });
-}
-
-function displayPurchaseHistory() {
-  const purchases = JSON.parse(localStorage.getItem('purchases')) || [];
-  const purchaseHistoryDiv = document.getElementById('purchase-history');
-  purchaseHistoryDiv.innerHTML = ''; // Clear previous entries
-
-  purchases.forEach(purchase => {
-      const purchaseItem = document.createElement('div');
-      purchaseItem.classList.add('purchase-item');
-
-      const purchaseDate = document.createElement('p');
-      purchaseDate.textContent = `Дата: ${new Date(purchase.date).toLocaleString()}`;
-
-      const purchaseCode = document.createElement('p');
-      purchaseCode.textContent = `Код подтверждения: ${purchase.code}`;
-
-      const purchaseItemsList = document.createElement('ul');
-
-      purchase.items.forEach(item => {
-          const listItem = document.createElement('li');
-          listItem.textContent = `${item.название}: ${item.количество}`;
-          purchaseItemsList.appendChild(listItem);
-      });
-
-      purchaseItem.appendChild(purchaseDate);
-      purchaseItem.appendChild(purchaseCode);
-      purchaseItem.appendChild(purchaseItemsList);
-
-      purchaseHistoryDiv.appendChild(purchaseItem);
   });
 }

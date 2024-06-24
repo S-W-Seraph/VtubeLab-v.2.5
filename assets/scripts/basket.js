@@ -56,25 +56,20 @@ function payWith(method) {
 }
 
 function showConfirmationPopup() {
-  // Generate an 8-digit confirmation code
   const confirmationCode = Math.floor(10000000 + Math.random() * 90000000);
   document.getElementById('confirmation-code').innerText = confirmationCode;
 
-  // Retrieve cart items
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-
-  // Create purchase info object
   const purchaseInfo = {
       code: confirmationCode,
       items: cartItems.filter(item => item.количество > 0).map(item => ({
           название: item.название,
           количество: item.количество
       })),
-      date: new Date().toISOString() // Add a timestamp to the purchase
+      date: new Date().toISOString()
   };
 
-  // Send purchase info to the server
-  fetch('/api/purchases', {
+  fetch('http://localhost:3000/api/purchases', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -88,13 +83,57 @@ function showConfirmationPopup() {
         console.error('Error saving purchase:', error);
     });
 
-  // Hide cart elements
   document.getElementById('carttable').style.display = 'none';
   document.getElementById('itemsquantity').style.display = 'none';
   document.getElementById('total').style.display = 'none';
   document.getElementById('buy-button').style.display = 'none';
   document.getElementById('emptycart').style.display = 'none';
 
-  // Show confirmation popup
   document.getElementById('confirmation-popup').style.display = 'block';
+}
+
+function closeConfirmationPopup() {
+  document.getElementById('confirmation-popup').style.display = 'none';
+}
+
+function copyCode() {
+  const code = document.getElementById('confirmation-code').innerText;
+  navigator.clipboard.writeText(code).then(() => {
+      alert('Код скопирован в буфер обмена!');
+  });
+}
+
+function displayPurchaseHistory() {
+  fetch('http://localhost:3000/api/purchases')
+      .then(response => response.json())
+      .then(purchases => {
+          const purchaseHistoryDiv = document.getElementById('purchase-history');
+          purchaseHistoryDiv.innerHTML = '';
+
+          purchases.forEach(purchase => {
+              const purchaseItem = document.createElement('div');
+              purchaseItem.classList.add('purchase-item');
+
+              const purchaseDate = document.createElement('p');
+              purchaseDate.textContent = `Дата: ${new Date(purchase.date).toLocaleString()}`;
+
+              const purchaseCode = document.createElement('p');
+              purchaseCode.textContent = `Код подтверждения: ${purchase.code}`;
+
+              const purchaseItemsList = document.createElement('ul');
+
+              purchase.items.forEach(item => {
+                  const listItem = document.createElement('li');
+                  listItem.textContent = `${item.название}: ${item.количество}`;
+                  purchaseItemsList.appendChild(listItem);
+              });
+
+              purchaseItem.appendChild(purchaseDate);
+              purchaseItem.appendChild(purchaseCode);
+              purchaseItem.appendChild(purchaseItemsList);
+
+              purchaseHistoryDiv.appendChild(purchaseItem);
+          });
+      })
+      .catch(error => console.error('Error fetching purchases:', error));
 }

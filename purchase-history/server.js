@@ -3,20 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // Connect to MongoDB
-const connectDB = async () => {
-    try {
-        await mongoose.connect('mongodb://localhost:27017/purchaseHistory', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log('MongoDB connected');
-    } catch (err) {
-        console.error(err.message);
-        process.exit(1);
-    }
-};
-
-connectDB();
+mongoose.connect('mongodb://localhost:27017/purchaseHistory', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 app.use(bodyParser.json());
@@ -30,27 +17,22 @@ const purchaseSchema = new mongoose.Schema({
 const Purchase = mongoose.model('Purchase', purchaseSchema);
 
 // Endpoint to save a purchase
-app.post('/api/purchases', async (req, res) => {
-    try {
-        const newPurchase = new Purchase(req.body);
-        const savedPurchase = await newPurchase.save();
+app.post('/api/purchases', (req, res) => {
+    const newPurchase = new Purchase(req.body);
+    newPurchase.save((err, savedPurchase) => {
+        if (err) return res.status(500).send(err);
         res.status(200).send(savedPurchase);
-    } catch (err) {
-        res.status(500).send(err);
-    }
+    });
 });
 
 // Endpoint to get all purchases
-app.get('/api/purchases', async (req, res) => {
-    try {
-        const purchases = await Purchase.find();
+app.get('/api/purchases', (req, res) => {
+    Purchase.find({}, (err, purchases) => {
+        if (err) return res.status(500).send(err);
         res.status(200).send(purchases);
-    } catch (err) {
-        res.status(500).send(err);
-    }
+    });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
 });

@@ -70,7 +70,6 @@
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
 
-            // Проверка логина и пароля
             if (username === 'admin' && password === '12345') {
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('action-list').style.display = 'block';
@@ -81,11 +80,11 @@
         }
 
         function displayPurchaseInfo() {
-            fetch('/api/purchases')
+            fetch('http://localhost:3000/api/purchases')
                 .then(response => response.json())
                 .then(purchases => {
                     const purchasesDiv = document.getElementById('purchases');
-                    purchasesDiv.innerHTML = ''; // Clear previous entries
+                    purchasesDiv.innerHTML = '';
 
                     purchases.forEach(purchase => {
                         const purchaseItem = document.createElement('div');

@@ -49,34 +49,23 @@
 
 
   <!-- Оплата -->
-  <div id="payment-popup" class="popup">
-    <div class="popup-content">
-        <span class="close-button" onclick="closePaymentPopup()">&times;</span>
-        <h2>Методы оплаты</h2>
-        <p>Выберите способ оплаты:</p>
-        <button onclick="payWith('Credit Card')">Кредитная карта</button>
-        <button onclick="payWith('PayPal')">PayPal</button>
-        <button onclick="payWith('Bank Transfer')">Банковский перевод</button>
-    </div>
-</div>
-
-
-    <!-- Подтверждение покупки -->
-    <div id="confirmation-popup" class="popup">
-      <div class="popup-content">
-          <span class="close-button" onclick="closeConfirmationPopup()">&times;</span>
-          <h2>Спасибо за покупку!</h2>
-          <p>Ваш код подтверждения: <span id="confirmation-code"></span></p>
-          <button onclick="copyCode()">Скопировать код</button>
-      </div>
+  <div id="payment-popup" style="display:none;">
+    <h2>Выберите способ оплаты</h2>
+    <button onclick="payWith('Кредитная карта')">Кредитная карта</button>
+    <button onclick="payWith('PayPal')">PayPal</button>
+    <button onclick="closePaymentPopup()">Отмена</button>
   </div>
-  
+
+  <div id="confirmation-popup" style="display:none;">
+    <h2>Код подтверждения</h2>
+    <p id="confirmation-code"></p>
+    <button onclick="copyCode()">Скопировать код</button>
+    <button onclick="closeConfirmationPopup()">Закрыть</button>
+  </div>
+
   <h2>История покупок</h2>
   <div id="purchase-history"></div>
 
-
-
-  <script src="./assets/scripts/basket.js"></script>
-
+  <script src="basket.js"></script>
 </body>
 </html>

@@ -232,6 +232,7 @@ p {
 .links__container {
     display: grid;
     grid-template-rows: 50% 50%;
+    row-gap: 8vh;
 }
 
 .gallery-link__container, .catalog-link__container {
@@ -240,7 +241,6 @@ p {
     justify-content: space-around;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10vh;
 }
 
 .gallery-link__container:hover {
@@ -253,6 +253,22 @@ p {
   transition: color 0.3s ease, fill 0.3s ease;
   color: #006DAA;
   fill: #006DAA;
+}
+
+.gallery-link__animation {
+  transition: transform .2s ease;
+}
+
+.gallery-link__animation:hover {
+  transform: translate3d(40px, 0px, 0px);
+}
+
+.catalog-link__animation {
+  transition: transform .2s ease;
+}
+
+.catalog-link__animation:hover {
+  transform: translate3d(-40px, 0px, 0px);
 }
 
 .links-image {
@@ -269,71 +285,35 @@ p {
 
 /* Футер */
 
-.footer {
-    background-color: #EDEDED;
-    margin-left: 10vw;
-    margin-right: 10vw;
-}
-  
-.footer__inner {
-    width: 100%;
-    margin: 0;
-    padding: 55px 0 60px;
-}
-  
-.footer__list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+.footer-link__container {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.footer__list-item {
-    width: 20%;
-    margin-bottom: 20px;
-}
-  .footer__list-item:hover .footer__logo {
-    fill: #006DAA;
-}
-  
-.footer__logo {
-    display: block;
-    margin: 0 auto;
-    transition: fill 0.1s linear;
-}
-.footer__logo:nth-child(1) {
-    width: 120px;
-    height: 90px;
-}
-.footer__logo:nth-child(2) {
-    width: 100px;
-    height: 100px;
- }
-.footer__logo:nth-child(3) {
-    width: 140px;
-    height: 95px;
-}
-.footer__logo:nth-child(4) {
-    width: 100px;
-    height: 100px;
-}
-.footer__logo:nth-child(5) {
-    width: 100px;
-    height: 70px;
+.footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0; 
-    margin: 0; 
+.footer-icon {
+  width: 40%;
+  height: auto;
+}
+
+.footer-icon:hover {
+  fill: #00598d;
+  transition: 0.3s ease;
 }
 
 .copyright {
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     position: relative;
-    font-weight: 400;
     font-size: 10px;
     color: #414141;
-    line-height: 23.48px;
     text-align: center;
 }
 
@@ -425,7 +405,7 @@ font-size: 18px;
   padding: 0 18px;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  transition: max-height 0.5s ease;
 }
 
 .panel__images {

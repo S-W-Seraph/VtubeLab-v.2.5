@@ -84,36 +84,39 @@
             }
         }
 
-        function displayPurchaseInfo() {
-            const purchases = JSON.parse(localStorage.getItem('purchases')) || [];
-            const purchasesDiv = document.getElementById('purchases');
-            purchasesDiv.innerHTML = ''; // Clear previous entries
+    document.addEventListener('DOMContentLoaded', () => {
+    const purchaseHistoryContainer = document.getElementById('purchaseHistory');
 
-            purchases.forEach(purchase => {
-                const purchaseItem = document.createElement('div');
-                purchaseItem.classList.add('purchase-item');
+    fetch('vtube-lab-v2.vercel.app/api/codes')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(code => {
+                const div = document.createElement('div');
+                div.classList.add('purchase-item');
 
-                const purchaseDate = document.createElement('p');
-                purchaseDate.textContent = `Дата: ${new Date(purchase.date).toLocaleString()}`;
+                const codeDiv = document.createElement('div');
+                codeDiv.textContent = `Code: ${code.code}`;
+                div.appendChild(codeDiv);
 
-                const purchaseCode = document.createElement('p');
-                purchaseCode.textContent = `Код подтверждения: ${purchase.code}`;
+                const dateDiv = document.createElement('div');
+                dateDiv.textContent = `Date: ${new Date(code.date).toLocaleString()}`;
+                div.appendChild(dateDiv);
 
-                const purchaseItemsList = document.createElement('ul');
+                const productsDiv = document.createElement('div');
+                productsDiv.innerHTML = code.products.map(product => `
+                    <div>
+                        <span>Name: ${product.name}</span>
+                        <span>Quantity: ${product.quantity}</span>
+                        <span>Price: ${product.price}</span>
+                    </div>
+                `).join('');
+                div.appendChild(productsDiv);
 
-                purchase.items.forEach(item => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `${item.название}: ${item.количество}`;
-                    purchaseItemsList.appendChild(listItem);
-                });
-
-                purchaseItem.appendChild(purchaseDate);
-                purchaseItem.appendChild(purchaseCode);
-                purchaseItem.appendChild(purchaseItemsList);
-
-                purchasesDiv.appendChild(purchaseItem);
+                purchaseHistoryContainer.appendChild(div);
             });
-        }
+        })
+        .catch(err => console.error(err));
+});
     </script>
 </body>
 </html>

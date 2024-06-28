@@ -87,7 +87,7 @@
     document.addEventListener('DOMContentLoaded', () => {
     const purchaseHistoryContainer = document.getElementById('purchaseHistory');
 
-    fetch('vtube-lab-v2.vercel.app/api/codes')
+    fetch('https://vtube-lab-v2.vercel.app/api/codes')
         .then(response => response.json())
         .then(data => {
             data.forEach(code => {

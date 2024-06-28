@@ -15,7 +15,7 @@
     <div class="item__container gallery"><a class="nav__link" href="gallery.html"><b>Gallery</b></a></div>
     <div class="item__container basket"><a class="nav__link" href="basket.html"><img class="basket__logo" src="assets/images/basket.svg" alt=""></a></div>
   </header>
-  <div class="cart-container">
+  <div class="cart-container animate__animated animate__fadeInUp">
     <h2 class="cart-title">Cart</h2>
     <div class="amount-title">
       <div class="cart-product"><strong>Продукт</strong></div>
@@ -44,7 +44,7 @@
 
 
   <!-- Оплата -->
-  <div id="payment-popup" class="popup">
+  <div id="payment-popup" class="popup animate__animated animate__fadeIn">
     <div class="popup-content">
         <span class="close-button" onclick="closePaymentPopup()">&times;</span>
         <h2>Оплата</h2>
@@ -60,7 +60,7 @@
 
 
     <!-- Подтверждение покупки -->
-    <div id="confirmation-popup" class="popup">
+    <div id="confirmation-popup" class="popup animate__animated animate__fadeIn">
       <div class="popup-content">
           <span class="close-button" onclick="closeConfirmationPopup()">&times;</span>
           <h2>Спасибо за покупку!</h2>
@@ -72,11 +72,6 @@
       </div>
   </div>
   
-
-
-
-
   <script src="./assets/scripts/basket.js"></script>
-
 </body>
 </html>

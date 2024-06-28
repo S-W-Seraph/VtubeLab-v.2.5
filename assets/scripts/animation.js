@@ -1,8 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const animatedElement = document.getElementById("animatedElement");
+import 'animate.css';
 
-    // Запуск анимации через 1 секунду после загрузки страницы
-    setTimeout(() => {
-        animatedElement.classList.add("visible");
-    }, 1000);
-});
+const animateHeader = document.getElementsByClassName('header');
+animateHeader.classlist.add('animate__animated animate__fadeIn');

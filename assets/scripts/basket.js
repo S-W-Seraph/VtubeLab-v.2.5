@@ -8,34 +8,39 @@ document.addEventListener('DOMContentLoaded', () => {
   let totalCartPrice = 0;
 
   cartItems.forEach(item => {
-      if (item.количество > 0) {
-          const row = document.createElement('tr');
-          const nameCell = document.createElement('td');
-          const priceCell = document.createElement('td');
-          const quantityCell = document.createElement('td');
+    if (item.количество > 0) {
+      const itemBox = document.createElement('div');
+      itemBox.classList.add('cart-item-box');
 
-          nameCell.textContent = item.название;
-          priceCell.textContent = `${item.цена} руб.`;
-          quantityCell.textContent = item.количество;
+      const nameElement = document.createElement('div');
+      nameElement.classList.add('cart-item-name');
+      const quantityElement = document.createElement('div');
+      quantityElement.classList.add('cart-item-quantity');
+      const priceElement = document.createElement('div');
+      priceElement.classList.add('cart-item-price');
 
-          row.appendChild(nameCell);
-          row.appendChild(priceCell);
-          row.appendChild(quantityCell);
+      nameElement.textContent = `${item.название}`;
+      quantityElement.textContent = `${item.количество} шт.`;
+      priceElement.textContent = `${item.цена} руб.`;
 
-          cartTable.appendChild(row);
+      itemBox.appendChild(nameElement);
+      itemBox.appendChild(quantityElement);
+      itemBox.appendChild(priceElement);
 
-          totalItemCount += item.количество;
-          totalCartPrice += item.цена * item.количество;
-      }
+      cartTable.appendChild(itemBox);
+
+      totalItemCount += item.количество;
+      totalCartPrice += item.цена * item.количество;
+    }
   });
 
-  totalItems.textContent = totalItemCount;
-  totalPrice.textContent = totalCartPrice;
+  totalItems.textContent = `${totalItemCount} шт.`;
+  totalPrice.textContent = `${totalCartPrice} руб.`;
 
   document.getElementById('emptycart').addEventListener('click', () => {
-      localStorage.removeItem('cart');
-      alert('Корзина очищена!');
-      window.location.reload();
+    localStorage.removeItem('cart');
+    alert('Корзина очищена!');
+    window.location.reload();
   });
 
   displayPurchaseHistory();
@@ -65,12 +70,12 @@ function showConfirmationPopup() {
 
   // Create purchase info object
   const purchaseInfo = {
-      code: confirmationCode,
-      items: cartItems.filter(item => item.количество > 0).map(item => ({
-          название: item.название,
-          количество: item.количество
-      })),
-      date: new Date().toISOString() // Add a timestamp to the purchase
+    code: confirmationCode,
+    items: cartItems.filter(item => item.количество > 0).map(item => ({
+      название: item.название,
+      количество: item.количество
+    })),
+    date: new Date().toISOString() // Add a timestamp to the purchase
   };
 
   // Retrieve existing purchases from local storage
@@ -103,7 +108,7 @@ function closeConfirmationPopup() {
 function copyCode() {
   const code = document.getElementById('confirmation-code').innerText;
   navigator.clipboard.writeText(code).then(() => {
-      alert('Код скопирован в буфер обмена!');
+    alert('Код скопирован в буфер обмена!');
   });
 }
 
@@ -113,27 +118,53 @@ function displayPurchaseHistory() {
   purchaseHistoryDiv.innerHTML = ''; // Clear previous entries
 
   purchases.forEach(purchase => {
-      const purchaseItem = document.createElement('div');
-      purchaseItem.classList.add('purchase-item');
+    const purchaseItem = document.createElement('div');
+    purchaseItem.classList.add('purchase-item');
 
-      const purchaseDate = document.createElement('p');
-      purchaseDate.textContent = `Дата: ${new Date(purchase.date).toLocaleString()}`;
+    const accordionButton = document.createElement('button');
+    accordionButton.classList.add('accordion');
+    accordionButton.classList.add('basket-accordion');
+    accordionButton.textContent = `${new Date(purchase.date).toLocaleString()}`;
 
-      const purchaseCode = document.createElement('p');
-      purchaseCode.textContent = `Код подтверждения: ${purchase.code}`;
+    const panelDiv = document.createElement('div');
+    panelDiv.classList.add('panel');
+    panelDiv.classList.add('panel-decoration');
 
-      const purchaseItemsList = document.createElement('ul');
+    const purchaseItemsList = document.createElement('ul');
 
-      purchase.items.forEach(item => {
-          const listItem = document.createElement('li');
-          listItem.textContent = `${item.название}: ${item.количество}`;
-          purchaseItemsList.appendChild(listItem);
-      });
+    const codeItem = document.createElement('p');
+    codeItem.textContent = `Код подтверждения: ${purchase.code}`;
+    purchaseItemsList.appendChild(codeItem);
+    purchase.items.forEach(item => {
+      
+      const listItem = document.createElement('li');
+      listItem.textContent = `${item.название}: ${item.количество}`;
+      purchaseItemsList.appendChild(listItem);
+    }
+  );
+  
 
-      purchaseItem.appendChild(purchaseDate);
-      purchaseItem.appendChild(purchaseCode);
-      purchaseItem.appendChild(purchaseItemsList);
+    
 
-      purchaseHistoryDiv.appendChild(purchaseItem);
+    panelDiv.appendChild(purchaseItemsList);
+    purchaseItem.appendChild(accordionButton);
+    purchaseItem.appendChild(panelDiv);
+
+    purchaseHistoryDiv.appendChild(purchaseItem);
   });
+
+  // Add the accordion functionality
+  const acc = document.getElementsByClassName("accordion");
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  }
 }
+

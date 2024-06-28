@@ -52,12 +52,17 @@
         <button onclick="login()">Войти</button>
     </div>
     <div id="action-list">
-        <h2>Список действий</h2>
-        <ul>
-            <li>Действие 1</li>
-            <li>Действие 2</li>
-            <li>Действие 3</li>
-        </ul>
+        <h1>Admin Panel</h1>
+    
+        <div class="upload-container">
+            <input type="file" id="fileInput" accept="image/*">
+            <input type="text" id="categoriesInput" placeholder="Enter categories separated by spaces">
+            <button id="uploadBtn">Upload Photo</button>
+        </div>
+        
+        <div class="gallery">
+            <!-- Uploaded images will be displayed here -->
+        </div>
         <div id="purchase-info">
             <h2>Информация о покупках</h2>
             <div id="purchases"></div>

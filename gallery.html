@@ -5,42 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div class="body_container">
       <header class="header">
-        <div class="header__container">
-            <div class="item__container logo__container">
-                <a class="logo__text nav__link" href="index.html"><img class="logo" src="assets/images/logo.png" alt=""><b>Vtubelab</b></a>
-            </div>
-            <div class="item__container catalog"><a class="nav__link" href="catalog.html"><b>Catalog</b></a></div>
-            <div class="item__container gallery"><a class="nav__link" href="gallery.html"><b>Gallery</b></a></div>
-            <div class="item__container basket"><a class="nav__link" href="basket.html"><img class="basket__logo" src="assets/images/basket.png" alt=""></a></div>
-        </div>
-    </header>
+        <div class="item__container logo__container"><a class="logo__text nav__link" href="index.html"><img class="logo" src="./assets/images/logo.svg" width="25" alt=""><b>Vtubelab</b></a></div>
+        <div class="item__container catalog"><a class="nav__link" href="catalog.html"><b>Catalog</b></a></div>
+        <div class="item__container gallery"><a class="nav__link" href="gallery.html"><b>Gallery</b></a></div>
+        <div class="item__container basket"><a class="nav__link" href="basket.html"><img class="basket__logo" src="assets/images/basket.svg" alt=""></a></div>
+      </header>
         <div class="gallery-description">
             <h3 class="gallery__title">Галерея</h3>
             <p class="gallery__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</з>
         </div>
+        <div class="filter-container">
+          <button class="filter-btn" data-filter="concept">Концепт-арт</button>
+          <button class="filter-btn" data-filter="model">Модель</button>
+          <button class="filter-btn" data-filter="rigging">Риг</button>
+          <button class="filter-btn" data-filter="overlay">Оверлей</button>
+          <button class="filter-btn" data-filter="stickers">Стикеры</button>
+          <button class="filter-btn reset-filter">Сбросить фильтры</button>
+      </div>
         <div class="album">
-            <div class="responsive-container-block bg">
-              <div class="responsive-container-block img-cont">
-                <img class="img" src="image1.png">
-                <img class="img" src="image3.jpeg">
-                <img class="img img-last" src="image5.jpeg">
+            <div class="">
+              <div class="">
+                <img data-categories="concept" src="assets/images/overlay1.jpg">
+                <img data-categories="overlay" src="assets/images/overlay2.jpg">
+                <img data-categories="stickers" src="assets/images/sticker2.png">
               </div>
-              <div class="responsive-container-block img-cont">
-                <img class="img img-big" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.11.svg">
-                <img class="img img-big img-last" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.10.svg">
-              </div>
-              <div class="responsive-container-block img-cont">
-                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.7.svg">
-                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.8.svg">
-                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/PP5.9.svg">
               </div>
             </div>
         </div>
     </div>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  let activeFilters = [];
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      if (button.classList.contains('reset-filter')) {
+        resetFilters();
+      } else {
+        toggleFilter(filter);
+      }
+
+      updateActiveStates();
+      filterGallery();
+    });
+  });
+
+  function showAllItems() {
+    galleryItems.forEach(item => item.style.display = 'block');
+  }
+
+  function filterGallery() {
+    if (activeFilters.length === 0) {
+      showAllItems();
+      return;
+    }
+
+    galleryItems.forEach(item => {
+      const itemCategories = item.getAttribute('data-categories').split(' ');
+      const shouldShow = activeFilters.some(filter => itemCategories.includes(filter));
+      item.style.display = shouldShow ? 'block' : 'none';
+    });
+  }
+
+  function toggleFilter(filter) {
+    const index = activeFilters.indexOf(filter);
+    if (index === -1) {
+      activeFilters.push(filter);
+    } else {
+      activeFilters.splice(index, 1);
+    }
+  }
+
+  function resetFilters() {
+    activeFilters = [];
+    showAllItems();
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+  }
+
+  function updateActiveStates() {
+    filterButtons.forEach(button => {
+      const filter = button.getAttribute('data-filter');
+      if (activeFilters.includes(filter)) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    });
+  }
+});
+
+  </script>
+
 </body>
 </html>

@@ -5,46 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basket</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <header class="header">
-    <div class="header__container">
-        <div class="item__container logo__container">
-            <a class="logo__text nav__link" href="index.html"><img class="logo" src="assets/images/logo.png" alt=""><b>Vtubelab</b></a>
-        </div>
-        <div class="item__container catalog"><a class="nav__link" href="catalog.html"><b>Catalog</b></a></div>
-        <div class="item__container gallery"><a class="nav__link" href="gallery.html"><b>Gallery</b></a></div>
-        <div class="item__container basket"><a class="nav__link" href="basket.html"><img class="basket__logo" src="assets/images/basket.png" alt=""></a></div>
-    </div>
+    <div class="item__container logo__container"><a class="logo__text nav__link" href="index.html"><img class="logo" src="./assets/images/logo.svg" width="25" alt=""><b>Vtubelab</b></a></div>
+    <div class="item__container catalog"><a class="nav__link" href="catalog.html"><b>Catalog</b></a></div>
+    <div class="item__container gallery"><a class="nav__link" href="gallery.html"><b>Gallery</b></a></div>
+    <div class="item__container basket"><a class="nav__link" href="basket.html"><img class="basket__logo" src="assets/images/basket.svg" alt=""></a></div>
   </header>
   <div class="cart-container">
-    <h2>Cart</h2>
-    <table>
-      <thead>
-        <tr>
-          <th><strong>Product</strong></th>
-          <th><strong>Price</strong></th>
-          <th><strong>Quantity</strong></th>
-        </tr>
-      </thead>
-      <tbody id="carttable"></tbody>
-    </table>
-    <hr>
-    <table id="carttotals">
-      <tr>
-        <td><strong>Items</strong></td>
-        <td><strong>Total</strong></td>
-      </tr>
-      <tr>
-        <td>x<span id="itemsquantity">0</span></td>
-        <td>₽<span id="total">0</span></td>
-      </tr>
-    </table>
-    <div class="cart-buttons">  
-      <button id="emptycart" onclick="emptyCart()">Empty Cart</button>
-      <button id="buy-button" onclick="showPaymentPopup()">Checkout</button>
+    <h2 class="cart-title">Cart</h2>
+    <div class="amount-title">
+      <div class="cart-product"><strong>Продукт</strong></div>
+      <div class="cart-quantity"><strong>Кол-во</strong></div>
+      <div class="cart-price"><strong>Цена</strong></div>
     </div>
+    <div id="carttable"></div>
+    <div id="carttotals">
+      <div class="total-container">
+        <div class="total-title"><h2>Итого:</h2></div>
+        <div class="total-quantity">
+          <span id="itemsquantity"></span>
+        </div>
+        <div class="total-price">
+          <span id="total">0₽</span>
+        </div>
+        <div class="cart-buttons">  
+          <button class="cart-delete" id="emptycart" onclick="emptyCart()"><img src="./assets/images/trash.svg" alt=""></button>
+          <button class="cart-buy"id="buy-button" onclick="showPaymentPopup()">Оплатить</button>
+        </div>
+      </div>
+    </div>
+    <h2>История покупок</h2>
+    <div class="purchase-history" id="purchase-history"></div>
   </div>
 
 
@@ -52,11 +47,14 @@
   <div id="payment-popup" class="popup">
     <div class="popup-content">
         <span class="close-button" onclick="closePaymentPopup()">&times;</span>
-        <h2>Методы оплаты</h2>
-        <p>Выберите способ оплаты:</p>
-        <button onclick="payWith('Credit Card')">Кредитная карта</button>
-        <button onclick="payWith('PayPal')">PayPal</button>
-        <button onclick="payWith('Bank Transfer')">Банковский перевод</button>
+        <h2>Оплата</h2>
+        <p>Выберите ваш способ оплаты:</p>
+        <div class="payment-way">
+          <div class="payment-way__button"><button onclick="payWith('Credit Card')">
+            <img class="payment-way__image" src="./assets/images/visa.svg" alt=""><br>Visa</button></div>
+          <div class="payment-way__button"><button onclick="payWith('PayPal')"><img class="payment-way__image" src="./assets/images/paypal.svg" alt=""><br>PayPal</button></div>
+          <div class="payment-way__button"><button onclick="payWith('Bank Transfer')"><img class="payment-way__image" src="./assets/images/sbp.svg" alt=""><br>Система быстрых платежей</button></div>
+        </div>
     </div>
 </div>
 
@@ -66,13 +64,15 @@
       <div class="popup-content">
           <span class="close-button" onclick="closeConfirmationPopup()">&times;</span>
           <h2>Спасибо за покупку!</h2>
-          <p>Ваш код подтверждения: <span id="confirmation-code"></span></p>
-          <button onclick="copyCode()">Скопировать код</button>
+          <div class="confirmation-text">
+            <p>Ваш код подтверждения: <b><span id="confirmation-code"></b></span></p>
+            <button class="button-copy" onclick="copyCode()"><img src="./assets/images/copy.svg" alt=""></button>
+          </div>
+          <p class="confirmation-subtext">Теперь свяжитесь с нами в сообществе<a class="confirmation-link" href="#"><b>Discord</b></a>для дальнейшего уточнения вашего заказа.</p>
       </div>
   </div>
   
-  <h2>История покупок</h2>
-  <div id="purchase-history"></div>
+
 
 
 

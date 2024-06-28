@@ -52,17 +52,12 @@
         <button onclick="login()">Войти</button>
     </div>
     <div id="action-list">
-        <h1>Admin Panel</h1>
-    
-        <div class="upload-container">
-            <input type="file" id="fileInput" accept="image/*">
-            <input type="text" id="categoriesInput" placeholder="Enter categories separated by spaces">
-            <button id="uploadBtn">Upload Photo</button>
-        </div>
-        
-        <div class="gallery">
-            <!-- Uploaded images will be displayed here -->
-        </div>
+        <h2>Список действий</h2>
+        <ul>
+            <li>Действие 1</li>
+            <li>Действие 2</li>
+            <li>Действие 3</li>
+        </ul>
         <div id="purchase-info">
             <h2>Информация о покупках</h2>
             <div id="purchases"></div>
@@ -84,39 +79,36 @@
             }
         }
 
-    document.addEventListener('DOMContentLoaded', () => {
-    const purchaseHistoryContainer = document.getElementById('purchaseHistory');
+        function displayPurchaseInfo() {
+            const purchases = JSON.parse(localStorage.getItem('purchases')) || [];
+            const purchasesDiv = document.getElementById('purchases');
+            purchasesDiv.innerHTML = ''; // Clear previous entries
 
-    fetch('https://vtube-lab-v2.vercel.app/api/codes')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(code => {
-                const div = document.createElement('div');
-                div.classList.add('purchase-item');
+            purchases.forEach(purchase => {
+                const purchaseItem = document.createElement('div');
+                purchaseItem.classList.add('purchase-item');
 
-                const codeDiv = document.createElement('div');
-                codeDiv.textContent = `Code: ${code.code}`;
-                div.appendChild(codeDiv);
+                const purchaseDate = document.createElement('p');
+                purchaseDate.textContent = `Дата: ${new Date(purchase.date).toLocaleString()}`;
 
-                const dateDiv = document.createElement('div');
-                dateDiv.textContent = `Date: ${new Date(code.date).toLocaleString()}`;
-                div.appendChild(dateDiv);
+                const purchaseCode = document.createElement('p');
+                purchaseCode.textContent = `Код подтверждения: ${purchase.code}`;
 
-                const productsDiv = document.createElement('div');
-                productsDiv.innerHTML = code.products.map(product => `
-                    <div>
-                        <span>Name: ${product.name}</span>
-                        <span>Quantity: ${product.quantity}</span>
-                        <span>Price: ${product.price}</span>
-                    </div>
-                `).join('');
-                div.appendChild(productsDiv);
+                const purchaseItemsList = document.createElement('ul');
 
-                purchaseHistoryContainer.appendChild(div);
+                purchase.items.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${item.название}: ${item.количество}`;
+                    purchaseItemsList.appendChild(listItem);
+                });
+
+                purchaseItem.appendChild(purchaseDate);
+                purchaseItem.appendChild(purchaseCode);
+                purchaseItem.appendChild(purchaseItemsList);
+
+                purchasesDiv.appendChild(purchaseItem);
             });
-        })
-        .catch(err => console.error(err));
-});
+        }
     </script>
 </body>
 </html>

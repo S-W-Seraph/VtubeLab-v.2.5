@@ -194,7 +194,7 @@ p {
 .overlays__text {
   display: flex;
   align-items: center;
-  padding-left: 10px;
+  padding-left: 2vw;
 }
 
 .overlays__image {
@@ -306,7 +306,7 @@ p {
 
 .footer-icon:hover {
   fill: #00598d;
-  transition: 0.3s ease;
+  transition: 0.3s ease-in;
 }
 
 .copyright {
@@ -344,7 +344,7 @@ p {
 }
 
 .product-box {
-    border: 2px solid #555;
+    border: 2px solid #aaa;
     box-shadow: 1px 2px 5px #aaa;
     border-image: linear-gradient ;
     border-radius: 10px;
@@ -516,7 +516,7 @@ font-size: 18px;
 .total {
   position: sticky;
   bottom: -10px;
-  border: 2px solid #212121;
+  border: 2px solid #aaa;
   border-radius: 10px;
   background-color: white;
   display: flex;

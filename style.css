@@ -265,6 +265,7 @@ p {
 
 .catalog-link__animation {
   transition: transform .2s ease;
+  margin-bottom: 20vh;
 }
 
 .catalog-link__animation:hover {

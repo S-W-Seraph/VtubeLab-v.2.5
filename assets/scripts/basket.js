@@ -60,44 +60,56 @@ function payWith(method) {
   showConfirmationPopup();
 }
 
+async function saveOrder(purchaseInfo) {
+  try {
+    const response = await fetch('/api/saveOrder', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(purchaseInfo)
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      console.log(`Order saved with ID: ${result.orderId}`);
+    } else {
+      console.error('Error saving order:', result.error);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
 function showConfirmationPopup() {
-  // Generate an 8-digit confirmation code
   const confirmationCode = Math.floor(10000000 + Math.random() * 90000000);
   document.getElementById('confirmation-code').innerText = confirmationCode;
 
-  // Retrieve cart items
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
-  // Create purchase info object
   const purchaseInfo = {
     code: confirmationCode,
     items: cartItems.filter(item => item.количество > 0).map(item => ({
       название: item.название,
       количество: item.количество
     })),
-    date: new Date().toISOString() // Add a timestamp to the purchase
+    date: new Date().toISOString()
   };
 
-  // Retrieve existing purchases from local storage
   let purchases = JSON.parse(localStorage.getItem('purchases')) || [];
-
-  // Add new purchase to the list
   purchases.push(purchaseInfo);
-
-  // Store updated purchases list in local storage
   localStorage.setItem('purchases', JSON.stringify(purchases));
 
-  // Hide cart elements
+  saveOrder(purchaseInfo);
+
   document.getElementById('carttable').style.display = 'none';
   document.getElementById('itemsquantity').style.display = 'none';
   document.getElementById('total').style.display = 'none';
   document.getElementById('buy-button').style.display = 'none';
   document.getElementById('emptycart').style.display = 'none';
 
-  // Show confirmation popup
   document.getElementById('confirmation-popup').style.display = 'block';
 
-  // Update the purchase history display
   displayPurchaseHistory();
 }
 

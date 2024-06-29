@@ -167,4 +167,23 @@ function displayPurchaseHistory() {
     });
   }
 }
-
+async function saveOrder(purchaseInfo) {
+  try {
+    const response = await fetch('/api/saveOrder', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(purchaseInfo)
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      console.log(`Order saved with ID: ${result.orderId}`);
+    } else {
+      console.error('Error saving order:', result.error);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}

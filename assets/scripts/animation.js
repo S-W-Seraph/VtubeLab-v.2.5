@@ -1,4 +1,5 @@
-function animateAndNavigate(event, url) {
+
+function animateAndNavigate(event, url, animation) {
     event.preventDefault(); // Prevent the default link behavior
 
     const elements = document.querySelectorAll('.animate__animated:not(.header)');
@@ -7,7 +8,7 @@ function animateAndNavigate(event, url) {
     elements.forEach((element) => {
         setTimeout(() => {
             element.classList.remove('animate__fadeInDown');
-            element.classList.add('animate__fadeOutRight');
+            element.classList.add(animation);
             element.style.opacity = 1; // Ensure elements are visible before fading out
         }, delay);
         delay += 100; // Shorter delay for quicker fade-out
@@ -15,7 +16,7 @@ function animateAndNavigate(event, url) {
 
     setTimeout(() => {
         window.location.href = url; // Navigate to the new page after animations
-    }, delay + 300); // Add extra time to ensure all animations complete
+    }, delay + 500); // Add extra time to ensure all animations complete
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -35,8 +36,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Add event listener to the catalog link
+    // Add event listeners to the links
     document.querySelector('a[href="catalog.html"]').addEventListener('click', function(event) {
-        animateAndNavigate(event, 'catalog.html');
+        animateAndNavigate(event, 'catalog.html', 'animate__fadeOutRight');
+    });
+
+    document.querySelector('a[href="gallery.html"]').addEventListener('click', function(event) {
+        animateAndNavigate(event, 'gallery.html', 'animate__fadeOutLeft');
+    });
+
+    document.querySelector('a[href="basket.html"]').addEventListener('click', function(event) {
+        animateAndNavigate(event, 'basket.html', 'animate__fadeOutUp');
     });
 });
+

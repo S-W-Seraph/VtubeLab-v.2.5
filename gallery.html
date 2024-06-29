@@ -16,11 +16,11 @@
         <div class="item__container gallery"><a class="nav__link" href="gallery.html"><b>Gallery</b></a></div>
         <div class="item__container basket"><a class="nav__link" href="basket.html"><img class="basket__logo" src="assets/images/basket.svg" alt=""></a></div>
       </header>
-        <div class="gallery-description animate__animated animate__fadeInRight">
+        <div class="gallery-description animate__animated">
             <h3 class="gallery__title">Галерея</h3>
             <p class="gallery__text">Здесь вы найдете удивительное сочетание искусства, креативности и вдохновения наших художников. Галерея представляет вам ознакомиться с творением художников, дизайнеров и остальных.</з>
         </div>
-        <div class="filter-container animate__animated animate__fadeInRight">
+        <div class="filter-container animate__animated">
           <button class="filter-btn" data-filter="concept">Концепт-арт</button>
           <button class="filter-btn" data-filter="model">Модель</button>
           <button class="filter-btn" data-filter="rigging">Риг</button>
@@ -28,7 +28,7 @@
           <button class="filter-btn" data-filter="stickers">Стикеры</button>
           <button class="filter-btn reset-filter">Сбросить фильтры</button>
       </div>
-        <div class="gallery animate__animated animate__fadeInRight">
+        <div class="gallery animate__animated">
 
         </div>
     </div>
@@ -97,8 +97,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+</script>
+<script>
+  function animateAndNavigate(event, url, animation) {
+      event.preventDefault(); // Prevent the default link behavior
 
-  </script>
+      const elements = document.querySelectorAll('.animate__animated:not(.header)');
+      let delay = 0;
 
+      elements.forEach((element) => {
+          setTimeout(() => {
+              element.classList.remove('animate__fadeInRight');
+              element.classList.add(animation);
+              element.style.opacity = 1; // Ensure elements are visible before fading out
+          }, delay);
+          delay += 100; // Shorter delay for quicker fade-out
+      });
+
+      setTimeout(() => {
+          window.location.href = url; // Navigate to the new page after animations
+      }, delay + 500); // Add extra time to ensure all animations complete
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+      const elements = document.querySelectorAll('.animate__animated');
+      let delay = 0;
+
+      elements.forEach((element) => {
+          if (element.classList.contains('header')) {
+              element.classList.add('animate__fadeInRight');
+              element.style.opacity = 1;
+          } else {
+              setTimeout(() => {
+                  element.classList.add('animate__fadeInRight');
+                  element.style.opacity = 1;
+              }, delay);
+              delay += 500;
+          }
+      });
+
+      // Add event listeners to the links
+      document.querySelector('a[href="index.html"]').addEventListener('click', function(event) {
+          animateAndNavigate(event, 'index.html', 'animate__fadeOutRight');
+      });
+
+      document.querySelector('a[href="catalog.html"]').addEventListener('click', function(event) {
+          animateAndNavigate(event, 'catalog.html', 'animate__fadeOutLeft');
+      });
+
+      document.querySelector('a[href="basket.html"]').addEventListener('click', function(event) {
+          animateAndNavigate(event, 'basket.html', 'animate__fadeOutUp');
+      });
+  });
+</script>
 </body>
 </html>

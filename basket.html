@@ -15,7 +15,7 @@
     <div class="item__container gallery"><a class="nav__link" href="gallery.html"><b>Gallery</b></a></div>
     <div class="item__container basket"><a class="nav__link" href="basket.html"><img class="basket__logo" src="assets/images/basket.svg" alt=""></a></div>
   </header>
-  <div class="cart-container animate__animated animate__fadeInUp">
+  <div class="cart-container animate__animated">
     <h2 class="cart-title">Cart</h2>
     <div class="amount-title">
       <div class="cart-product"><strong>Продукт</strong></div>
@@ -73,5 +73,57 @@
   </div>
   
   <script src="./assets/scripts/basket.js"></script>
+  <script>
+    function animateAndNavigate(event, url, animation) {
+        event.preventDefault(); // Prevent the default link behavior
+
+        const elements = document.querySelectorAll('.animate__animated:not(.header)');
+        let delay = 0;
+
+        elements.forEach((element) => {
+            setTimeout(() => {
+                element.classList.remove('animate__fadeInDown');
+                element.classList.add(animation);
+                element.style.opacity = 1;
+            }, delay);
+            delay += 100;
+        });
+
+        setTimeout(() => {
+            window.location.href = url;
+        }, delay + 500);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll('.animate__animated');
+        let delay = 0;
+
+        elements.forEach((element) => {
+            if (element.classList.contains('header')) {
+                element.classList.add('animate__fadeInUp');
+                element.style.opacity = 1;
+            } else {
+                setTimeout(() => {
+                    element.classList.add('animate__fadeInUp');
+                    element.style.opacity = 1;
+                }, delay);
+                delay += 500;
+            }
+        });
+
+        // Add event listeners to the links
+        document.querySelector('a[href="index.html"]').addEventListener('click', function(event) {
+            animateAndNavigate(event, 'index.html', 'animate__fadeOutDown');
+        });
+
+        document.querySelector('a[href="catalog.html"]').addEventListener('click', function(event) {
+            animateAndNavigate(event, 'catalog.html', 'animate__fadeOutDown');
+        });
+
+        document.querySelector('a[href="gallery.html"]').addEventListener('click', function(event) {
+            animateAndNavigate(event, 'gallery.html', 'animate__fadeOutDown');
+        });
+    });
+</script>
 </body>
 </html>

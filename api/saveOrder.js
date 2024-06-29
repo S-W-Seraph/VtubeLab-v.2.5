@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
   try {
     await client.connect();
     const database = client.db('purchaseHistory');
-    const collection = database.collection('purshares');
+    const collection = database.collection('purchases');
     
     const order = req.body;
     const result = await collection.insertOne(order);
